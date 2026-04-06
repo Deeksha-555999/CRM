@@ -25,11 +25,14 @@ const Login = () => {
       return;
     }
 
-    if (
-      user &&
-      user.email === formData.email &&
-      user.password === formData.password
-    ) {
+    let foundUser = null;
+    user.forEach(element => {
+      if (element.email === formData.email && element.password === formData.password) {
+        foundUser = element;
+      }
+    });
+
+    if (foundUser) {
       alert("Login successful");
       navigate("/nav");
     } else {

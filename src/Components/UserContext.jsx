@@ -5,7 +5,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   // Create a state to hold the user data
-  const [user, setUser] = useState(null); // Provide the user data and the function to update it to the children components
+  const [user, setUser] = useState([]); // Provide the user data and the function to update it to the children components
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

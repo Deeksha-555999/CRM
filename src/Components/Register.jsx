@@ -1,10 +1,10 @@
- import React, { useState } from "react";
+ import React, { use, useState } from "react";
 import { Link} from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
-  const {  setUser } = React.useContext(UserContext);
-    const navigate = useNavigate();
+  const { user, setUser } = React.useContext(UserContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,11 +38,10 @@ const Register = () => {
     if (formData.password !== formData.confirmPassword) {
       ((newError.confirmPassword = "Password don't match"), (success = false));
     }
-
     setError(newError);
 
     if (success) {
-      setUser(formData);
+      setUser([...user, formData]);
       setAlert({ message: "Registration is successfully done" });
       navigate("/login");
     }
