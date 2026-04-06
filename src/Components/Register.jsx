@@ -1,6 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+ import React, { useState } from "react";
+import { Link} from "react-router-dom";
+import { UserContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+  const {  setUser } = React.useContext(UserContext);
+    const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,7 +18,6 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let newError = {};
     let success = true;
 
@@ -25,8 +28,7 @@ const Register = () => {
       ((newError.email = "Email is required"), (success = false));
     }
     if (!formData.password) {
-      ((newError.password = "Password is required"), (success = 
-        false));
+      ((newError.password = "Password is required"), (success = false));
     }
     if (!formData.confirmPassword) {
       ((newError.confirmPassword = "Confirm Password is required"),
@@ -34,26 +36,15 @@ const Register = () => {
     }
 
     if (formData.password !== formData.confirmPassword) {
-      ((newError.confirmPassword = "Password don't match"),
-        (success = false));
+      ((newError.confirmPassword = "Password don't match"), (success = false));
     }
 
     setError(newError);
 
     if (success) {
-      setTimeout(() => {
-        (window.alert("Registration is successfully done"),
-          console.log(
-            "name: ",
-            formData.name,
-            "email:  ",
-            formData.email,
-            "password: ",
-            formData.password,
-            "confirm Password:",
-            formData.confirmPassword,
-          ));
-      }, 2000);
+      setUser(formData);
+      setAlert({ message: "Registration is successfully done" });
+      navigate("/login");
     }
   };
 
@@ -86,7 +77,7 @@ const Register = () => {
             <label style={style.label}>
               Full Name
               <input
-                type="name"
+                type="text"
                 className="form-input"
                 name="name"
                 placeholder="Enter your Name"
@@ -160,7 +151,10 @@ const Register = () => {
                 name="role"
                 className="form-input "
                 style={style.role}
+                value={formData.role}
+                onChange={handleChange}
               >
+                <option value="">Select Role</option>
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
               </select>
@@ -245,8 +239,8 @@ const style = {
     color: "white",
   },
   role: {
-    width: "200%",
-
+    width: "155%",
+  border: "1px solid #ccc",
     padding: "12px",
     borderRadius: "6px",
     margin: "10px 0",

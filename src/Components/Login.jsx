@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const { user, setUser } = React.useContext(UserContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,6 +19,22 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.email || !formData.password) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    if (
+      user &&
+      user.email === formData.email &&
+      user.password === formData.password
+    ) {
+      alert("Login successful");
+      navigate("/nav");
+    } else {
+      alert("Invalid email or password");
+    }
   };
 
   return (
@@ -23,12 +43,13 @@ const Login = () => {
         <h2
           className="card"
           style={{
-        //     textAlign: "center",
-           marginBottom: "2rem",
-         backgroundColor: "#111111",
+            //     textAlign: "center",
+            marginBottom: "2rem",
+            backgroundColor: "#111111",
             color: "white",
-           fontSize: "1.25rem",fontWeight: '600'
-         }}
+            fontSize: "1.25rem",
+            fontWeight: "600",
+          }}
         >
           Login to CRM
         </h2>
@@ -69,7 +90,7 @@ const Login = () => {
         </form>
         <p style={style.text}>
           Don't have any account?{" "}
-          <Link style={style.register} to ="/register">
+          <Link style={style.register} to="/register">
             Register Here
           </Link>
         </p>
@@ -91,7 +112,7 @@ const style = {
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
-    backgroundColor: 'black',
+    backgroundColor: "black",
     fontFamily: "Arial, sans-serif",
   },
   label: {
@@ -105,7 +126,7 @@ const style = {
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
-    marginTop: '1rem'
+    marginTop: "1rem",
   },
   log: {
     backgroundColor: "#111111",
@@ -114,7 +135,7 @@ const style = {
     borderRadius: "8px",
     width: "310px",
     textAlign: "center",
-   // boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+    // boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
   },
   input: {
     padding: "12px",
