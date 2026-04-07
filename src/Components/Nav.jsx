@@ -2,31 +2,49 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Dash from "./Dash";
 import Sidebar from "./Sidebar";
-
+import { UserContext } from "./UserContext";
+import { CustomerContext } from "./CustomerContext";
+import { LeadContext } from "./LeadContext";
 
 const Nav = () => {
-  
+  const { customers } = React.useContext( CustomerContext);
+  const { leads } = React.useContext(LeadContext);
+
+  const totalCustomers = customers.length;
+  const activeCustomers = customers.filter(
+    (customer) => customer.status === "Active"
+  ).length; 
+
+  const totalLeads = leads.length;
+  const newLeadsToday = leads.filter(
+    (lead) => lead.status === "new"
+  ).length;
   return (
     
+
     <div className="root" style={style.root}>
       {/* <Sidebar/> */}
       <div className="main-content" style={style.main}>
         {/* <Dash/> */}
         <div className="cards"  style={style.cards}>
           <div className="card" style={style.card}>
-            <h2 style={style.cardh2}>0</h2>
+            <h2 style={style.cardh2}>{totalCustomers}</h2>
+            {/* {totalCustomers} */}
             <p style={style.p}>TOTAL CUSTOMERS</p>
           </div>
           <div className="card" style={style.card}>
-            <h2 style={style.cardh2}>0</h2>
+            <h2 style={style.cardh2}>{activeCustomers}</h2>
+            {/* {activeCustomers} */}
             <p style={style.p}>ACTIVE CUSTOMERS</p>
           </div>
           <div className="card" style={style.card}>
-            <h2 style={style.cardh2}>0</h2>
+            <h2 style={style.cardh2}>{totalLeads}</h2>
+            {/* {totalLeads} */}
             <p style={style.p}>TOTAL LEADS</p>
           </div>
           <div className="card" style={style.card}>
-            <h2 style={style.cardh2}>0</h2>
+            <h2 style={style.cardh2}>{newLeadsToday}</h2>
+            {/* {newLeadsToday} */}
             <p style={style.p}>NEW LEAD TODAY</p>
           </div>
         </div>

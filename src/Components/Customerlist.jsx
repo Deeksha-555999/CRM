@@ -1,13 +1,16 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import Dash from "./Dash";
+import { CustomerContext } from "./CustomerContext";
 
 const Customerlist = () => {
+  const { customers , setCustomers } = React.useContext(CustomerContext);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     e.preventDefault();
+     
+
   };
   
   return (
@@ -63,6 +66,8 @@ const Customerlist = () => {
           backgroundColor: "#000000",
         }}
       >
+       
+
         <div
           className="mb-3"
           style={{
@@ -78,6 +83,7 @@ const Customerlist = () => {
         >
           Failed to Fetch Customers
         </div>
+      
         <div className="mb-3">
           <input
             type="email"
@@ -97,20 +103,7 @@ const Customerlist = () => {
             }}
           />
         </div>
-        {/* <div
-          style={{
-            backgroundColor: "#222222",
-            borderColor: "#555555",
-            width: "100%",
-            color: "#fff",
-            //padding: "0.75rem 1rem",
-            marginInline: "1rem",
-          // borderRadius: "4px",
-            border: "1px solid",
-            //marginTop: "15px",
-
-          }}
-        > */}
+      
           <table className="table mb-3" style={{borderSpacing: "2px", border: "1px solid #333333", marginInline: "1rem", padding: "0.75rem 1rem"}}>
             <thead style={{borderCollapse: "collapse"}}>
               <tr style={{color: "white",backgroundColor :"#111111", width: "100%"}}>
@@ -124,14 +117,31 @@ const Customerlist = () => {
               </tr>
             </thead>
             <tbody style={{width: "100%", }}>
-                <tr style={{color: "white", marginTop: "2px", }}>
-                    <td colSpan={7} style={{ padding: "2rem", textAlign: "center", }}>No customers found.</td>
+              {customers.length > 0 ? (
+                customers.map((customer, index) => (
+                  <tr key={index} style={{color: "white", backgroundColor: "#1a1a1a", width: "100%"}}>  
+                    <td>{customer.fullname}</td>
+                    <td>{customer.email}</td>
+                    <td>{customer.phonenumber}</td>
+                    <td>{customer.company}</td>
+                    <td>{customer.status}</td>
+                    
+                    <td>Active</td>
+                    {/* <td>{new Date().toLocaleDateString()}</td> */}
                 </tr>
+                ))
+              ) : (
+                <tr style={{color: "white", backgroundColor: "#1a1a1a", width: "100%"}}>
+                  <td colSpan="8" style={{ textAlign: "center" }}>  
+                    No customers found. Please add new customers.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
+         </div>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -1,10 +1,11 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import Dash from "./Dash";
+import { useContext } from "react";
+import { CustomerContext } from "./CustomerContext";
 
 const Customer = () => {
+  const { customers  , setCustomers } = useContext(CustomerContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullname: "",
@@ -25,6 +26,9 @@ const Customer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("created customer:", formData);
+    setCustomers([...customers, formData]);
+    navigate("/nav");
+
   };
 
   return (
@@ -97,7 +101,8 @@ const Customer = () => {
                 Full Name
               </label>
               <input
-                type="text"
+                type="text" 
+                name="fullname"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -145,6 +150,7 @@ const Customer = () => {
               </label>
               <input
                 type="tel"
+                name="phonenumber"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -167,7 +173,8 @@ const Customer = () => {
                 Company
               </label>
               <input
-                type="email"
+                type="text"
+                name="company"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"

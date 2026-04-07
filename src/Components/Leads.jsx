@@ -1,10 +1,10 @@
 import React from 'react'
  import { useState } from 'react';
  import { useNavigate } from 'react-router-dom';
- import Sidebar from './Sidebar';
-import Dash from './Dash';
+import { LeadContext } from './LeadContext';
 
 const Leads = () => {
+  const { leads, setLeads } = React.useContext(LeadContext);
 
      const navigate = useNavigate();
       const [formData, setFormData] = useState({
@@ -13,19 +13,23 @@ const Leads = () => {
         phonenumber: "",
         address: "",
         company: "",
-        status: "Active",
+        status: "",
+        leadsource: "",
+        notes: "",
       });
     
-      const handleChange = (e) => {
+      const handleChange = (e, fieldName) => {
         setFormData({
           ...formData,
-          [e.target.name]: e.target.value,
+          [fieldName]: e.target.value,
         });
       };
     
       const handleSubmit = (e) => {
-        e.preventDeafult();
-        console.log("created customer:", formData);
+        e.preventDefault();
+        console.log("created lead:", formData);
+        setLeads([...leads, formData]);
+        navigate("/nav"); 
       };
 
   return (
@@ -60,7 +64,7 @@ const Leads = () => {
         <button
           type="button"
           className="btn btn-secondary"
-         onClick={() => navigate("/leads/new")}
+         onClick={() => navigate("/leads")}
           style={{
             backgroundColor: "black",
             color: "white",
@@ -105,7 +109,7 @@ const Leads = () => {
                 aria-describedby="emailHelp"
                 placeholder="Enter Customer Name"
                 value={formData.fullname}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'fullname')}
                 style={{
                   backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -129,7 +133,7 @@ const Leads = () => {
                 aria-describedby="emailHelp"
                 placeholder="Enter Customer Email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'email')}
                  style={{
                   backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -153,7 +157,7 @@ const Leads = () => {
                 aria-describedby="emailHelp"
                 placeholder="Enter Customer Phone no. "
                 value={formData.phonenumber}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'phonenumber')}
                  style={{
                   backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -177,7 +181,7 @@ const Leads = () => {
             //    aria-describedby="emailHelp"
                 placeholder="Enter Company Name"
                 value={formData.company}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'company')}
                  style={{
                   backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -200,7 +204,7 @@ const Leads = () => {
                 aria-describedby="emailHelp"
                 placeholder="Enter Company Name"
                 value={formData.leadsource}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'leadsource')}
                  style={{
                   backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -211,14 +215,14 @@ const Leads = () => {
                   width: '100%'
                 }}
               >
-                  <option value="active">Select source</option>
-                <option value="">Website</option>
-                <option value="prospect">Social Media</option>
-                 <option value="active">Referral</option>
-                <option value="inactive">Email Campaign</option>
-                <option value="prospect">Trade Show</option>
-                 <option value="active">Cold Call</option>
-                <option value="inactive">Others</option>
+                <option value="all status">Select source</option>
+                <option value="website">Website</option>
+                <option value="social-media">Social Media</option>
+               <option value="referral">Referral</option>
+                <option value="email-campaign">Email Campaign</option>
+                <option value="trade-show">Trade Show</option>
+                <option value="cold-call">Cold Call</option>
+                <option value="others">Others</option>
                 
                 </select>
             </div>
@@ -232,9 +236,9 @@ const Leads = () => {
                 className="form-control"
                 // id="exampleInputEmail1"
                 // aria-describedby="emailHelp"
-                placeholder="Enter Company Name"
+                //placeholder="Enter Company Name"
                 value={formData.status}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'status')}
                  style={{
                   backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -245,11 +249,11 @@ const Leads = () => {
                   width: '100%'
                 }}
               >
-                 <option value="active">New</option>
-                <option value="">Contacted</option>
-                <option value="prospect">Qualified</option>
-                 <option value="active">Converted</option>
-                <option value="inactive">Lost</option>
+                 <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="qualified">Qualified</option>
+                 <option value="converted">Converted</option>
+                <option value="lost">Lost</option>
                
                 
                 </select>
@@ -265,7 +269,7 @@ const Leads = () => {
                 id="exampleFormControlTextarea1"
                 type= "number"
                
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'assignedto')}
                 style={{
                     backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -287,13 +291,13 @@ const Leads = () => {
                 Notes
               </label>
               <textarea
-                type="email"
+                type="text"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 rows={3}
                 value={formData.notes}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, 'notes')}
                  style={{
                   backgroundColor: "#000000",
                   border: " 1px solid #333333",
@@ -318,7 +322,7 @@ const Leads = () => {
             <button
               type="button"
               className="btn" style={{backgroundColor: "black", color: "#fff", border: '1px solid white'}}
-              onClick={() => navigate("/customer")}
+              onClick={() => navigate("/leads")}
             >
               Cancel
             </button>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Sidebar from './Sidebar';
-import Dash from './Dash';
+import { LeadContext } from './LeadContext';
 
 const Lead = () => {
+  const { leads } = React.useContext(LeadContext);
      const navigate = useNavigate();
 
      const handleChange= (e) => {
@@ -104,10 +104,10 @@ const Lead = () => {
           />
            
               <select
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
+                type="name"
+                //className="form-control"
+                //id="exampleInputEmail1"
+               // aria-describedby="emailHelp"
                 onChange={handleChange}
                  style={{
                   backgroundColor: "#000000",
@@ -119,12 +119,12 @@ const Lead = () => {
                   width: "200px"
                 }}
               >
-                <option value="active">All Status </option>
-                <option value="inactive">New</option>
-                <option value="inactive">Qualified</option>
-                <option value="prospect">Contacted</option>
-                <option value="inactive">Converted</option>
-                <option value="inactive">Lost</option>
+                <option value="all status">All Status </option>
+                <option value="new">New</option>
+                <option value="qualified">Qualified</option>
+                <option value="contacted">Contacted</option>
+                <option value="converted">Converted</option>
+                <option value="lost">Lost</option>
               </select>
             </div>
             </div>
@@ -141,9 +141,27 @@ const Lead = () => {
               </tr>
             </thead>
             <tbody style={{width: "100%", }}>
+              {
+               leads.length > 0 ? ( 
+              leads.map((lead) => (
                 <tr style={{color: "white", marginTop: "2px", }}>
-                    <td colSpan={7} style={{ padding: "2rem", textAlign: "center", }}>No customers found.</td>
+                  <td>{lead.fullname}</td>  
+                  <td>{lead.email}</td>
+                  <td>{lead.phonenumber}</td>
+                  <td>{lead.company}</td> 
+                  <td>{lead.status}</td>
+                  <td>{lead.createdAt}</td>
+                  </tr>
+              )) 
+              ) : (
+
+               <tr style={{color: "white", backgroundColor: "#1a1a1a", width: "100%"}}>
+                    <td colSpan={7} style={{ padding: "2rem", textAlign: "center", }}>No leads found.</td>
+                    
+
                 </tr>
+              )
+              }
             </tbody>
           </table>
         </div>
