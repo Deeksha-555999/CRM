@@ -1,13 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext } from './UserContext';
 
 const Dash = () => {
+  const { user } = React.useContext(UserContext);
+
+  const greeting = user?.role === "admin" ? "Welcome, System Admin" : "Welcome, System User";
+
   return (
     <div>
       <header className="header" style={style.header}>
                 <h1 style={style.h1}>Dashboard</h1>
                 <div className="action" style={style.action}>
-                  <span className="user-info"  style={{color:"#cccccc"}}>Welcome, System Admin</span>
+                  <span className="user-info"  style={{color:"#cccccc"}}>{greeting}</span>
                   <Link  to = "/" className="btn btn-secondary btn-sm" style={style.button}>
                     Logout
                   </Link>

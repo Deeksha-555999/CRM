@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CustomerContext } from "./CustomerContext";
 
-const Customer = () => {
+const Customer = ({ user }) => {
   const { customers  , setCustomers } = useContext(CustomerContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -15,6 +15,11 @@ const Customer = () => {
     company: "",
     status: "Active",
   });
+ 
+  const isAdmin = (user) =>
+    user.role === "admin";
+   
+
 
   const handleChange = (e) => {
     setFormData({
@@ -63,7 +68,14 @@ const Customer = () => {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() => navigate("/customer")}
+          onClick={() => { 
+            if (isAdmin(user)) {
+              navigate("/customers/new");
+            } else {
+              alert("You are not an admin!");
+            }
+          }                
+        }
           style={{
             backgroundColor: "black",
             color: "white",

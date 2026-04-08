@@ -3,9 +3,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomerContext } from "./CustomerContext";
 
-const Customerlist = () => {
+const Customerlist = ({ user }) => {
   const { customers , setCustomers } = React.useContext(CustomerContext);
   const navigate = useNavigate();
+
+const isAdmin = (user) => 
+  user.role === "admin";
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -44,7 +48,14 @@ const Customerlist = () => {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() => navigate("/customers/new")}
+          onClick={() => {
+            if (isAdmin(user)) {
+              navigate("/customers/new");
+            } else {
+              alert("You are not an admin!");
+            }
+          }
+        }
           style={{
             backgroundColor: "black",
             color: "white",
@@ -132,7 +143,7 @@ const Customerlist = () => {
                 ))
               ) : (
                 <tr style={{color: "white", backgroundColor: "#1a1a1a", width: "100%"}}>
-                  <td colSpan="8" style={{ textAlign: "center" }}>  
+                  <td colSpan="8" style={{ textAlign: "center", padding: "2rem" }}>  
                     No customers found. Please add new customers.
                   </td>
                 </tr>

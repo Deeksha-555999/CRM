@@ -2,9 +2,14 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LeadContext } from './LeadContext';
 
-const Lead = () => {
+const Lead = ({ user }) => {
   const { leads } = React.useContext(LeadContext);
      const navigate = useNavigate();
+
+
+     const isAdmin = (user) => 
+       user.role === "admin";
+    
 
      const handleChange= (e) => {
           e.preventDefault()
@@ -24,6 +29,7 @@ const Lead = () => {
        // position: "fixed"
       }}
     >
+      
       <div
         style={{
          // alignItems: "center",
@@ -35,10 +41,20 @@ const Lead = () => {
         }}
       >
         <h1>Lead Management</h1>
+
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() => navigate("/leads/new")}
+          onClick={() => {
+            if (isAdmin(user)) {
+              navigate("/leads/new");
+            }
+          else {
+            alert("You are not an admin!");
+          } }
+        }
+
+          
           style={{
             backgroundColor: "black",
             color: "white",
@@ -46,10 +62,13 @@ const Lead = () => {
             padding: "0.5rem 1rem",
             cursor: "pointer",
           }}
+        
         >
           Add New Lead
         </button>
+
       </div>
+      
       <div
         className="card"
         style={{
@@ -137,7 +156,7 @@ const Lead = () => {
                 <th>Company</th>
                 <th>Status</th>
                 <th>Created</th>
-                <th>Action</th>
+                {/* <th>Action</th> */}
               </tr>
             </thead>
             <tbody style={{width: "100%", }}>
@@ -150,7 +169,7 @@ const Lead = () => {
                   <td>{lead.phonenumber}</td>
                   <td>{lead.company}</td> 
                   <td>{lead.status}</td>
-                  <td>{lead.createdAt}</td>
+                  
                   </tr>
               )) 
               ) : (

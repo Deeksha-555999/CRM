@@ -29,7 +29,6 @@ const Nav = () => {
         <div className="cards"  style={style.cards}>
           <div className="card" style={style.card}>
             <h2 style={style.cardh2}>{totalCustomers}</h2>
-            {/* {totalCustomers} */}
             <p style={style.p}>TOTAL CUSTOMERS</p>
           </div>
           <div className="card" style={style.card}>
@@ -52,11 +51,11 @@ const Nav = () => {
         <div
           style={{
             display: "grid",
-            paddingLeft: "20px",
+           // paddingLeft: "20px",
             paddingRight: "20px",
-            gap: "2rem",
+            gap: "1rem",
             gridTemplateColumns: "1fr 1fr",
-            marginLeft: "30px",
+            //marginLeft: "30px",
             
           }}
         >
@@ -108,6 +107,7 @@ const Nav = () => {
                 paddingLeft: "20px",
               }}
             >
+              
               <Link to="/customers/new" style={style.whitebtn}>
                 Add New Customer
               </Link>
@@ -157,13 +157,13 @@ const style = {
 
   cards: {
     display: "grid",
-    gap: "20px",
+    gap: "15px",
     marginBottom: "1rem",
     gridTemplateColumns: "repeat(4, 1fr)",
-    paddingLeft: "20px",
+   // paddingLeft: "20px",
     paddingRight: "20px",
     marginTop: "1rem",
-    marginLeft: "10px"
+    //marginLeft: "10px"
   },
   card: {
     // backgroundColor: "#181818",
