@@ -2,18 +2,21 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import { CustomerContext } from "./CustomerContext";
+import { UserContext } from "./UserContext";
+import { LoginContext } from "./LoginContext";
 
-const Customerlist = ({ user }) => {
+const Customerlist = ({ users }) => {
+  const {currentUser, setCurrentUser} = React.useContext(LoginContext);
   const { customers , setCustomers } = React.useContext(CustomerContext);
   const navigate = useNavigate();
 
-const isAdmin = (user) => 
-  user.role === "admin";
+   
+const isAdmin  =  currentUser?.role === "admin";
 
 
   const handleChange = (e) => {
     e.preventDefault();
-     
+     setCurrentUser({ ...currentUser, role: "admin" });
 
   };
   
@@ -41,7 +44,7 @@ const isAdmin = (user) =>
           justifyContent: "space-between",
           borderBottom: "1px solid #333333",
           paddingBottom: "1rem",
-          marginLeft: "30px"
+         // marginLeft: "30px"
         }}
       >
         <h1>Customer Management</h1>
@@ -49,13 +52,14 @@ const isAdmin = (user) =>
           type="button"
           className="btn btn-secondary"
           onClick={() => {
-            if (isAdmin(user)) {
+            if (isAdmin) {
               navigate("/customers/new");
             } else {
               alert("You are not an admin!");
             }
           }
-        }
+          }
+
           style={{
             backgroundColor: "black",
             color: "white",

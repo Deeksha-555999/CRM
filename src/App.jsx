@@ -12,11 +12,14 @@ import Users from "./Components/Users";
 import{ UserProvider} from "./Components/UserContext";
 import { LeadProvider } from "./Components/LeadContext";
 import { CustomerProvider } from "./Components/CustomerContext";
+import { LoginProvider } from "./Components/LoginContext";    
+
 
 function App() {
   return (
     <>
       <UserProvider>
+            <LoginProvider>
         <LeadProvider>
           <CustomerProvider>
         <BrowserRouter>
@@ -40,6 +43,7 @@ function App() {
         </BrowserRouter>
         </CustomerProvider>
         </LeadProvider>
+        </LoginProvider>
       </UserProvider>
     </>
   );

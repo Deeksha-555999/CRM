@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Dash from "./Dash";
+import { LoginContext } from './LoginContext';
 const Header = () => {
   const location = useLocation();
+  const { currentUser, setCurrentUser } = React.useContext(LoginContext);
 
   let pageTitle = "";
   switch (location.pathname) {
@@ -24,22 +26,23 @@ const Header = () => {
   }
 
   return (
-    <div style={{backgroundColor: "#111111"}}>
+    <div style={{backgroundColor: "#111111", display: "flex", justifyContent: "center"}}>
       <div
         style={{
           borderBottom: "1px solid #333",
           padding: "1rem",
           marginLeft: "250px",
-          width: "120%",
-          display: "flex",
-          alignItems: "end",
+          width: "100%",
+         display: "flex",
+         // alignItems: "end",
+          justifyContent: "flex-start",
         }}
       >
         <h2>{pageTitle}</h2>
          <header className="header" style={style.header}>
           <div className="action" style={style.action}>
             <span className="user-info" style={{ color: "#cccccc" }}>
-              Welcome, System Admin
+              Welcome, {currentUser?.role == 'user' ?"user": "admin"}
             </span>
             <Link
               to="/"
@@ -64,24 +67,24 @@ const style = {
     //flexDirection: "column",
     // marginTop: "20px"
   },
-  h1: {
+  h2: {
     fontSize: "24px",
     color: "#fff",
     marginLeft: "50px",
-    fontSize: "2rem",
+    fontSize: "1.5rem",
     marginTop: "1px",
   },
   header: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    //justifyContent: "space-between",
+    //alignItems: "center",
     //padding: "1rem 2rem",
     //borderBottom: "1px solid #333333",
-    lineHeight: "1.2",
+    //lineHeight: "1.2",
    //marginBottom: "20px",
     color: "#fff",
     backgroundColor: "#111111",
-    marginLeft: "47%"
+    marginLeft: "70%"
   },
   button: {
     padding: "6px 12px",

@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
+import { LoginContext } from "./LoginContext";
+
 const Login = () => {
-  const { user, setUser } = React.useContext(UserContext);
+  const { users, setUsers} = React.useContext(UserContext);
+  const { currentUser, setCurrentUser } = React.useContext(LoginContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+ 
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -17,6 +20,7 @@ const Login = () => {
     });
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -26,13 +30,15 @@ const Login = () => {
     }
 
     let foundUser = null;
-    user.forEach(element => {
+    users.forEach(element => {
       if (element.email === formData.email && element.password === formData.password) {
         foundUser = element;
       }
     });
 
     if (foundUser) {
+      debugger;
+      setCurrentUser(foundUser);
       alert("Login successful");
       navigate("/nav");
     } else {

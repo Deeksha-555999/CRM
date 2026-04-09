@@ -6,7 +6,7 @@ import Dash from "./Dash";
 const Users = () => {
   const navigate = useNavigate();
   return (
-    <div>
+    
      
         <div
           style={{
@@ -20,12 +20,12 @@ const Users = () => {
             position:"fixed"
           }}
         >
-          <header style={{ padding: "2rem" }}>
+          <header style={{ padding: "2rem",  position: "fixed", width: "100%"}}>
             <div onClick={() => navigate("/users")}>Failed to fetch users</div>
           </header>
         
       </div>
-    </div>
+    
   );
 };
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from './UserContext';
+import { LoginContext } from './LoginContext';
 
 const Dash = () => {
-  const { user } = React.useContext(UserContext);
 
-  const greeting = user?.role === "admin" ? "Welcome, System Admin" : "Welcome, System User";
+  console.log
+
+  const greeting = currentUser?.role === "admin" ? "Welcome, System Admin" :currentUser?.role === "user" ? "Welcome, System User" : "Welcome, Guest";
 
   return (
     <div>
@@ -13,7 +14,7 @@ const Dash = () => {
                 <h1 style={style.h1}>Dashboard</h1>
                 <div className="action" style={style.action}>
                   <span className="user-info"  style={{color:"#cccccc"}}>{greeting}</span>
-                  <Link  to = "/" className="btn btn-secondary btn-sm" style={style.button}>
+                  <Link  to = "/" className="btn btn-secondary btn-sm" style={style.button} onClick ={() => setCurrentUser(null)}>
                     Logout
                   </Link>
                 </div>

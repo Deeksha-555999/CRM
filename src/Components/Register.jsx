@@ -3,7 +3,7 @@ import { Link} from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
-  const { user, setUser } = React.useContext(UserContext);
+  const { users, setUsers } = React.useContext(UserContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -12,6 +12,8 @@ const Register = () => {
     confirmPassword: "",
     role: "",
   });
+
+
 
   const [error, setError] = useState({});
   const [alert, setAlert] = useState({});
@@ -41,7 +43,7 @@ const Register = () => {
     setError(newError);
 
     if (success) {
-      setUser([...user, formData]);
+      setUsers([...users, formData]);
       setAlert({ message: "Registration is successfully done" });
       navigate("/login");
     }

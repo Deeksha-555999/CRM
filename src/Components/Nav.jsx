@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Dash from "./Dash";
-import Sidebar from "./Sidebar";
-import { UserContext } from "./UserContext";
 import { CustomerContext } from "./CustomerContext";
 import { LeadContext } from "./LeadContext";
+import { LoginContext } from "./LoginContext";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const { customers } = React.useContext( CustomerContext);
   const { leads } = React.useContext(LeadContext);
+  const { currentUser } = React.useContext(LoginContext);
+  const navigate = useNavigate();
 
   const totalCustomers = customers.length;
   const activeCustomers = customers.filter(
@@ -19,6 +20,9 @@ const Nav = () => {
   const newLeadsToday = leads.filter(
     (lead) => lead.status === "new"
   ).length;
+
+const isAdmin  =  currentUser?.role === "admin";
+
   return (
     
 
@@ -108,12 +112,29 @@ const Nav = () => {
               }}
             >
               
-              <Link to="/customers/new" style={style.whitebtn}>
+              <button style={style.whitebtn}
+               onClick={() => {
+            if (isAdmin) {
+              navigate("/customers/new");
+            } else {
+              alert("You are not an admin!");
+            }
+          }
+        }
+              >
                 Add New Customer
-              </Link>
-              <Link to="/leads/new" style={style.whitebtn}>
+              </button>
+              <button style={style.whitebtn}
+              onClick={() => {
+              if (isAdmin) {
+                navigate("/leads/new");
+              } else {
+                alert("You are not an admin!");
+              }
+            }}
+              >
                 Add New Lead
-              </Link>
+              </button>
               <Link to="/customer" style={style.darkbtn}>
                 Manage Customers
               </Link>
