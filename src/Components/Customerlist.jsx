@@ -44,7 +44,7 @@ const isAdmin  =  currentUser?.role === "admin";
           justifyContent: "space-between",
           borderBottom: "1px solid #333333",
           paddingBottom: "1rem",
-         // marginLeft: "30px"
+          marginLeft: "30px"
         }}
       >
         <h1>Customer Management</h1>
