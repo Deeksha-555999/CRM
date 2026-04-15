@@ -5,14 +5,14 @@ import { LoginContext } from "./LoginContext";
 
 const Lead = () => {
   const { leads } = React.useContext(LeadContext);
-  const {currentUser, setCurrentUser} = React.useContext(LoginContext);
+  const { currentUser, setCurrentUser } = React.useContext(LoginContext);
   const navigate = useNavigate();
 
   const isAdmin = currentUser?.role === "admin";
 
   const handleChange = (e) => {
     e.preventDefault();
-      setCurrentUser(prev => ({ ...prev, role: "admin" }));
+    setCurrentUser((prev) => ({ ...prev, role: "admin" }));
   };
   return (
     <div>
@@ -24,7 +24,7 @@ const Lead = () => {
           minHeight: "100vh",
           padding: "2rem",
           marginLeft: "220px",
-         // marginTop: "30px",
+          // marginTop: "30px",
           // position: "fixed"
         }}
       >
@@ -35,7 +35,7 @@ const Lead = () => {
             justifyContent: "space-between",
             borderBottom: "1px solid #333333",
             paddingBottom: "1rem",
-           // marginLeft: "30px",
+            // marginLeft: "30px",
           }}
         >
           <h1>Lead Management</h1>

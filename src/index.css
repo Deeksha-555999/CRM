@@ -1,11 +1,4 @@
-
-/* body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #1e1e1e;
-  color: #fff;
-} */
-body{
+body {
   background-color: black;
-   overflow-x: hidden;
+  overflow-x: hidden;
 }

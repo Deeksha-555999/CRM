@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Dash from "./Dash";
-import { LoginContext } from './LoginContext';
+import { LoginContext } from "./LoginContext";
 const Header = () => {
   const location = useLocation();
   const { currentUser, setCurrentUser } = React.useContext(LoginContext);
@@ -26,23 +26,29 @@ const Header = () => {
   }
 
   return (
-    <div style={{backgroundColor: "#111111", display: "flex", justifyContent: "center"}}>
+    <div
+      style={{
+        backgroundColor: "#111111",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <div
         style={{
           borderBottom: "1px solid #333",
           padding: "1rem",
           marginLeft: "250px",
           width: "100%",
-         display: "flex",
-         // alignItems: "end",
+          display: "flex",
+          // alignItems: "end",
           justifyContent: "flex-start",
         }}
       >
         <h2>{pageTitle}</h2>
-         <header className="header" style={style.header}>
+        <header className="header" style={style.header}>
           <div className="action" style={style.action}>
             <span className="user-info" style={{ color: "#cccccc" }}>
-              Welcome, {currentUser?.role == 'user' ?"user": "admin"}
+              Welcome, {currentUser?.role == "user" ? "user" : "admin"}
             </span>
             <Link
               to="/"
@@ -52,8 +58,7 @@ const Header = () => {
               Logout
             </Link>
           </div>
-        </header> 
-     
+        </header>
       </div>
     </div>
   );
@@ -81,10 +86,10 @@ const style = {
     //padding: "1rem 2rem",
     //borderBottom: "1px solid #333333",
     //lineHeight: "1.2",
-   //marginBottom: "20px",
+    //marginBottom: "20px",
     color: "#fff",
     backgroundColor: "#111111",
-    marginLeft: "70%"
+    marginLeft: "70%",
   },
   button: {
     padding: "6px 12px",

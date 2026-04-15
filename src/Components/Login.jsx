@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./LoginContext";
 
 const Login = () => {
-  const { users, setUsers} = React.useContext(UserContext);
+  const { users, setUsers } = React.useContext(UserContext);
   const { currentUser, setCurrentUser } = React.useContext(LoginContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
- 
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,7 +20,6 @@ const Login = () => {
     });
   };
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -30,8 +29,11 @@ const Login = () => {
     }
 
     let foundUser = null;
-    users.forEach(element => {
-      if (element.email === formData.email && element.password === formData.password) {
+    users.forEach((element) => {
+      if (
+        element.email === formData.email &&
+        element.password === formData.password
+      ) {
         foundUser = element;
       }
     });

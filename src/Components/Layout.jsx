@@ -9,8 +9,8 @@ const Layout = () => {
     <div className="root" style={styles.root}>
       <Sidebar />
       <div className="main" style={styles.main}>
-        <Header/>
-        <Outlet/>
+        <Header />
+        <Outlet />
       </div>
     </div>
   );
@@ -21,8 +21,7 @@ const styles = {
     display: "flex",
     minHeight: "100vh",
     background: "#000",
-    color: "#fff", 
-
+    color: "#fff",
   },
   main: { flex: 1, marginLeft: "15px", padding: "10px" },
 };

@@ -1,41 +1,45 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div>
       <div className="sidebar" style={style.sidebar}>
-              <div style={style.logo}> CRM System </div>
-              <ul style={style.list}>
-                <li style={{margin: "0.25rem 0", display: "list-item",boxSizing: "border-box"}}>
-                  <NavLink to="/nav" style={style.link}>
-                    Dashboard
-                    
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/customer" style={style.link}>
-                    Customer
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/leads" style={style.link}>
-                    Leads
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/users" style={style.link}>
-                    User Management
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
+        <div style={style.logo}> CRM System </div>
+        <ul style={style.list}>
+          <li
+            style={{
+              margin: "0.25rem 0",
+              display: "list-item",
+              boxSizing: "border-box",
+            }}
+          >
+            <NavLink to="/nav" style={style.link}>
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/customer" style={style.link}>
+              Customer
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/leads" style={style.link}>
+              Leads
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/users" style={style.link}>
+              User Management
+            </NavLink>
+          </li>
+        </ul>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 const style = {
-
-     sidebar: {
+  sidebar: {
     width: "250px",
     backgroundColor: "#111111",
     borderRight: "1px solid #333333",
@@ -46,7 +50,6 @@ const style = {
     textAlign: "center",
     padding: "1rem",
     borderLeft: "1px solid #333",
-    
   },
 
   list: {
@@ -55,19 +58,16 @@ const style = {
     padding: "0",
     listStyle: "none",
     textAlign: "start",
-    
-    
   },
   logo: {
     fontSize: "1.7rem",
     fontWeight: "bold",
-   // marginBottom: "30px",
+    // marginBottom: "30px",
     padding: "1rem 1.5rem",
     borderBottom: "1px solid #333333",
-    marginBottom: "1rem"
-    
+    marginBottom: "1rem",
   },
-   link: {
+  link: {
     display: "block",
     padding: "12px 15px",
     marginBottom: "10px",
@@ -77,9 +77,8 @@ const style = {
     transition: "0.3s",
     backgroundColor: "#222222",
     borderLeftColor: "#fff",
-    borderLeft: "3px solid transparent"
+    borderLeft: "3px solid transparent",
   },
+};
 
-}
-
-export default Sidebar
+export default Sidebar;

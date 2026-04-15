@@ -6,31 +6,27 @@ import { LoginContext } from "./LoginContext";
 import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  const { customers } = React.useContext( CustomerContext);
+  const { customers } = React.useContext(CustomerContext);
   const { leads } = React.useContext(LeadContext);
   const { currentUser } = React.useContext(LoginContext);
   const navigate = useNavigate();
 
   const totalCustomers = customers.length;
   const activeCustomers = customers.filter(
-    (customer) => customer.status === "Active"
-  ).length; 
-
-  const totalLeads = leads.length;
-  const newLeadsToday = leads.filter(
-    (lead) => lead.status === "new"
+    (customer) => customer.status === "Active",
   ).length;
 
-const isAdmin  =  currentUser?.role === "admin";
+  const totalLeads = leads.length;
+  const newLeadsToday = leads.filter((lead) => lead.status === "new").length;
+
+  const isAdmin = currentUser?.role === "admin";
 
   return (
-    
-
     <div className="root" style={style.root}>
       {/* <Sidebar/> */}
       <div className="main-content" style={style.main}>
         {/* <Dash/> */}
-        <div className="cards"  style={style.cards}>
+        <div className="cards" style={style.cards}>
           <div className="card" style={style.card}>
             <h2 style={style.cardh2}>{totalCustomers}</h2>
             <p style={style.p}>TOTAL CUSTOMERS</p>
@@ -55,12 +51,11 @@ const isAdmin  =  currentUser?.role === "admin";
         <div
           style={{
             display: "grid",
-           // paddingLeft: "20px",
+            // paddingLeft: "20px",
             paddingRight: "20px",
             gap: "1rem",
             gridTemplateColumns: "1fr 1fr",
             //marginLeft: "30px",
-            
           }}
         >
           <div className="card" style={style.card}>
@@ -70,7 +65,6 @@ const isAdmin  =  currentUser?.role === "admin";
                 style={{
                   textAlign: "start",
                   fontSize: "1.25rem",
-                  
                 }}
               >
                 Recent Leads
@@ -111,27 +105,27 @@ const isAdmin  =  currentUser?.role === "admin";
                 paddingLeft: "20px",
               }}
             >
-              
-              <button style={style.whitebtn}
-               onClick={() => {
-            if (isAdmin) {
-              navigate("/customers/new");
-            } else {
-              alert("You are not an admin!");
-            }
-          }
-        }
+              <button
+                style={style.whitebtn}
+                onClick={() => {
+                  if (isAdmin) {
+                    navigate("/customers/new");
+                  } else {
+                    alert("You are not an admin!");
+                  }
+                }}
               >
                 Add New Customer
               </button>
-              <button style={style.whitebtn}
-              onClick={() => {
-              if (isAdmin) {
-                navigate("/leads/new");
-              } else {
-                alert("You are not an admin!");
-              }
-            }}
+              <button
+                style={style.whitebtn}
+                onClick={() => {
+                  if (isAdmin) {
+                    navigate("/leads/new");
+                  } else {
+                    alert("You are not an admin!");
+                  }
+                }}
               >
                 Add New Lead
               </button>
@@ -163,7 +157,7 @@ const style = {
     color: "#fff",
     display: "flex",
     minHeight: "100vh",
-    
+
     //borderBottom: "1px solid #333333",
     // borderTop: "1px solid #333333"
   },
@@ -181,7 +175,7 @@ const style = {
     gap: "15px",
     marginBottom: "1rem",
     gridTemplateColumns: "repeat(4, 1fr)",
-   // paddingLeft: "20px",
+    // paddingLeft: "20px",
     paddingRight: "20px",
     marginTop: "1rem",
     //marginLeft: "10px"
@@ -194,7 +188,7 @@ const style = {
     color: "#fff",
     backgroundColor: "#111111",
     border: "1px solid #333333",
-    marginLeft: "20px"
+    marginLeft: "20px",
   },
   cardh2: {
     fontSize: "28px",
@@ -206,7 +200,6 @@ const style = {
     flexDirection: "column",
     textAlign: "start",
     borderBottom: "1px solid #333333",
-    
   },
 
   p: {

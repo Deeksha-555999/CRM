@@ -1,5 +1,5 @@
- import React, {  useState } from "react";
-import { Link} from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
@@ -12,8 +12,6 @@ const Register = () => {
     confirmPassword: "",
     role: "",
   });
-
-
 
   const [error, setError] = useState({});
   const [alert, setAlert] = useState({});
@@ -241,7 +239,7 @@ const style = {
   },
   role: {
     width: "155%",
-  border: "1px solid #ccc",
+    border: "1px solid #ccc",
     padding: "12px",
     borderRadius: "6px",
     margin: "10px 0",
